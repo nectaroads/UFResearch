@@ -1,4 +1,5 @@
 import { createServer } from 'node:http';
+import { isIP } from 'node:net';
 import { readFile } from 'node:fs/promises';
 import pg from 'pg';
 import { hashPassword, verifyPassword, sessionHash, startSession, endSession } from './auth.mjs';
@@ -21,6 +22,7 @@ if (configuredOrigin) {
   hostedOrigin = parsed.origin;
 }
 const secureCookies = production || config.secureCookies === true;
+const trustLocalProxy = !production || process.env.UFRESEARCH_TRUST_LOCAL_PROXY === 'true';
 const database = process.env.UFRESEARCH_DATABASE_CONFIG
   ? JSON.parse(await readFile(process.env.UFRESEARCH_DATABASE_CONFIG, 'utf8'))
   : config.database;
@@ -132,7 +134,10 @@ async function updateAccount(target, data, request, account) {
 }
 
 async function signIn(request, response) {
-  const address = (production ? undefined : request.headers['x-ufresearch-client-ip']) ?? request.socket.remoteAddress;
+  const peer = request.socket.remoteAddress;
+  const proxyAddress = request.headers['x-ufresearch-client-ip'];
+  const localProxy = trustLocalProxy && ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(peer);
+  const address = localProxy && typeof proxyAddress === 'string' && isIP(proxyAddress) ? proxyAddress : peer;
   const attempts = loginAttempts.get(address) ?? 0;
   if (attempts >= 20) throw new HttpError(429, 'Muitas tentativas. Aguarde alguns minutos e tente novamente.');
   const data = await readJson(request);
