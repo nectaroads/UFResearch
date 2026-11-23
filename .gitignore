@@ -1,0 +1,16 @@
+node_modules/
+config.json
+.env
+.env.*
+*.log
+coverage/
+.vscode/
+.DS_Store
+Thumbs.db
+/data/
+/client/dist/
+/backups/
+*.dump
+*.backup
+*.pem
+*.key

@@ -1,0 +1,17 @@
+{
+  "host": "127.0.0.1",
+  "port": 3001,
+  "database": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "ufresearch",
+    "user": "ufresearch",
+    "password": ""
+  },
+  "coordinator": {
+    "login": "",
+    "name": "Coordenação",
+    "password": ""
+  },
+  "secureCookies": false
+}

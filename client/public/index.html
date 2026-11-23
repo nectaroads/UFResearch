@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal de pesquisa, publicações científicas e equipe do UFResearch.">
+  <title>UFResearch · Portal de pesquisa</title>
+  <link rel="icon" href="./assets/brasao-ufba.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="masthead">
+    <div class="wrap masthead-inner">
+      <a href="https://ufba.br/" data-institution>Universidade Federal da Bahia</a>
+      <span>Salvador, Bahia</span>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#inicio">
+        <img src="./assets/brasao-ufba.png" alt="Brasão da UFBA" width="52" height="52">
+        <span><strong data-brand>UFResearch</strong><small>Portal de pesquisa</small></span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#inicio" data-nav="inicio">Início</a>
+        <a href="#equipe" data-nav="equipe">Equipe</a>
+        <a href="#publicacoes" data-nav="publicacoes">Publicações</a>
+      </nav>
+      <a class="access" href="#login" id="access"><span class="icon person" aria-hidden="true"></span> Entrar</a>
+    </div>
+  </header>
+  <main id="conteudo" tabindex="-1">
+    <p class="wrap loading" role="status">Carregando portal…</p>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div><strong data-brand>UFResearch</strong><div>Portal de pesquisa acadêmica</div></div>
+      <div class="footer-links">
+        <a href="https://ufba.br/" data-institution>Universidade Federal da Bahia</a>
+        <span>Salvador, Bahia</span>
+      </div>
+    </div>
+  </footer>
+  <dialog id="editor" aria-labelledby="dialog-title"></dialog>
+  <noscript>Ative o JavaScript no navegador para acessar o portal.</noscript>
+</body>
+</html>

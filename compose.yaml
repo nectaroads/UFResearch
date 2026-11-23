@@ -1,0 +1,43 @@
+name: ufresearch
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ufresearch
+      POSTGRES_USER: ufresearch
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Execute node setup.mjs primeiro}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "ufresearch", "-d", "ufresearch"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  server:
+    build: ./server
+    environment:
+      PGHOST: db
+      SERVER_HOST: 0.0.0.0
+    volumes:
+      - type: bind
+        source: ./server/config.json
+        target: /app/config.json
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      db:
+        condition: service_healthy
+    init: true
+  client:
+    build: ./client
+    environment:
+      API_URL: http://server:3001
+      CLIENT_HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - server
+    init: true
+volumes:
+  postgres-data:

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Abrir UFResearch
+Comment=Abre o portal de pesquisa no navegador
+Exec=sh -c "exec sh \"\$(dirname \"\$1\")/iniciar-linux.sh\"" ufresearch %k
+Icon=web-browser
+Terminal=true
+Categories=Education;
