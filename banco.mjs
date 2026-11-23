@@ -49,7 +49,7 @@ try {
     const archive = join(directory, 'banco.dump');
     try {
       await postgres('pg_dump', [
-        '--format=custom', '--schema=public', '--exclude-table-data=public.sessions', '--file=' + partial,
+        '--format=custom', '--exclude-table-data=public.sessions', '--file=' + partial,
       ], config);
       await rename(partial, archive);
     } catch (error) {
